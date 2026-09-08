@@ -1,5 +1,1 @@
-Flask
-gunicorn
-psycopg[binary]
-razorpay
-python-dotenv
+Flask==3.1.2

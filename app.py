@@ -1,10 +1,8 @@
-from flask import Flask, send_from_directory, jsonify
+from flask import Flask, send_from_directory
 from pathlib import Path
-import os
 
+app = Flask(__name__)
 BASE_DIR = Path(__file__).resolve().parent
-
-app = Flask(__name__, static_folder=str(BASE_DIR), static_url_path="")
 
 @app.get("/")
 def home():
@@ -12,8 +10,8 @@ def home():
 
 @app.get("/health")
 def health():
-    return jsonify({"status": "ok", "service": "MaakaTiffin"})
+    return {"status": "ok", "service": "MaaKaTiffin"}
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))
+    port = int(__import__("os").environ.get("PORT", "10000"))
     app.run(host="0.0.0.0", port=port)
