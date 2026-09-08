@@ -1,17 +1,126 @@
-<!doctype html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MaaKaTiffin — Real-Time MVP</title>
-<link rel="stylesheet" href="/static/style.css"></head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MaakaTiffin - Home-made tiffin meals from local mothers.">
+  <title>MaakaTiffin | Homemade Food</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
 <body>
-<header><div class="logo">🍱 MaaKaTiffin <small>Ghar Jaisa Khana, Maa Ke Haath Se.</small></div>
-<div class="actions"><button onclick="login('customer')">👤 Customer Login</button><button class="seller" onclick="login('seller')">👩‍🍳 Seller Login</button></div></header>
-<section class="hero"><div><h1>Homemade food <span>near you.</span></h1><p>Find mothers making fresh tiffins nearby. See live availability, collection time, reviews and book online.</p>
-<div class="search"><input id="q" placeholder="Search mother, food or area" oninput="render()"><button onclick="locate()">📍 Use my location</button></div>
-<div class="filters"><button class="active" onclick="radius=5;render()">Today · 5 km</button><button onclick="radius=20;render()">🌟 Weekend · 20 km</button></div></div></section>
-<main><aside><h2 id="title">Home cooks near you</h2><p class="muted">Live availability</p><div id="cards"></div></aside><section id="map"><div class="mapnote">🗺️ Map view<br><small>Mother pins are shown below</small></div><div id="pins"></div></section></main>
-<section id="seller" class="panel"><h2>👩‍🍳 Seller Dashboard</h2><div class="sellergrid"><div><small>Today's capacity</small><b id="sTotal">—</b></div><div><small>Booked</small><b id="sBooked">—</b></div><div><small>Remaining</small><b id="sRemaining">—</b></div><div><small>Online collected</small><b id="sMoney">₹0</b></div></div>
-<div class="formbox"><h3>Update today's availability</h3><label>Tiffins you can make <input id="capacity" type="number" min="0" value="30"></label><label>Collection time <input id="collection" value="12:30 PM - 1:30 PM"></label><button class="seller" onclick="saveSeller()">Save & Broadcast Live</button><p id="saved" class="success"></p></div></section>
-<section id="customer" class="panel"><h2>👤 Customer Dashboard</h2><div id="booking"></div></section>
-<footer>© MaaKaTiffin · Prototype. Real payments and production security will be added before launch.</footer>
-<div id="modal" class="modal"><div class="modalbox"><button class="x" onclick="closeModal()">×</button><div id="modalBody"></div></div></div>
-<script src="/static/app.js"></script></body></html>
+  <header class="navbar">
+    <a class="brand" href="/">
+      <span class="brand-icon">🍱</span>
+      <span>MaakaTiffin</span>
+    </a>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#tiffins">Tiffins</a>
+      <a href="#how">How it works</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <span class="badge">❤️ Made with home-style care</span>
+        <h1>Fresh, homemade<br><span>tiffin near you.</span></h1>
+        <p>Connect with trusted home cooks for fresh meals, flexible tiffin plans and easy ordering.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#tiffins">Explore Tiffins</a>
+          <a class="btn secondary" href="#how">How it works</a>
+        </div>
+        <div class="trust-row">
+          <span>✓ Fresh daily</span>
+          <span>✓ Home-style meals</span>
+          <span>✓ Flexible plans</span>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="food-emoji">🍛</div>
+        <h3>Today's home-style meal</h3>
+        <p>Dal • Roti • Sabzi • Rice • Salad</p>
+        <div class="card-bottom"><strong>From ₹80</strong><span>Available today</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="tiffins">
+      <div class="section-heading">
+        <span class="eyebrow">POPULAR CHOICES</span>
+        <h2>Choose your tiffin</h2>
+        <p>Simple, fresh meals prepared by local home cooks.</p>
+      </div>
+      <div class="cards">
+        <article class="meal-card">
+          <div class="meal-image">🍱</div>
+          <div class="meal-body">
+            <h3>Regular Tiffin</h3>
+            <p>Roti, sabzi, dal, rice & salad.</p>
+            <div class="price">₹80 <small>/ meal</small></div>
+            <button class="order-btn" data-meal="Regular Tiffin">Order / Enquire</button>
+          </div>
+        </article>
+        <article class="meal-card">
+          <div class="meal-image">🥗</div>
+          <div class="meal-body">
+            <h3>Healthy Tiffin</h3>
+            <p>Balanced home-style meal with lighter options.</p>
+            <div class="price">₹100 <small>/ meal</small></div>
+            <button class="order-btn" data-meal="Healthy Tiffin">Order / Enquire</button>
+          </div>
+        </article>
+        <article class="meal-card">
+          <div class="meal-image">🍛</div>
+          <div class="meal-body">
+            <h3>Special Tiffin</h3>
+            <p>Special homemade menu for a satisfying meal.</p>
+            <div class="price">₹120 <small>/ meal</small></div>
+            <button class="order-btn" data-meal="Special Tiffin">Order / Enquire</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="steps section" id="how">
+      <div class="section-heading">
+        <span class="eyebrow">HOW IT WORKS</span>
+        <h2>From home kitchen to your door</h2>
+      </div>
+      <div class="step-grid">
+        <div><span>1</span><h3>Choose a tiffin</h3><p>Select a meal that fits your needs.</p></div>
+        <div><span>2</span><h3>Pick your plan</h3><p>Choose daily or regular meal delivery.</p></div>
+        <div><span>3</span><h3>Enjoy fresh food</h3><p>Get a warm, home-style meal.</p></div>
+      </div>
+    </section>
+
+    <section class="cta section" id="contact">
+      <div>
+        <span class="eyebrow">GET STARTED</span>
+        <h2>Ready for a ghar-jaisa meal?</h2>
+        <p>MaakaTiffin is being built to make fresh home-made food easy to discover and order.</p>
+      </div>
+      <button class="btn primary" id="contactBtn">Contact MaakaTiffin</button>
+    </section>
+  </main>
+
+  <footer>
+    <strong>🍱 MaakaTiffin</strong>
+    <span>Fresh home-made food from local kitchens.</span>
+    <span>© <span id="year"></span> MaakaTiffin</span>
+  </footer>
+
+  <div class="modal hidden" id="modal">
+    <div class="modal-box">
+      <button class="close" id="closeModal">×</button>
+      <h2 id="modalTitle">Order / Enquire</h2>
+      <p id="modalText">Your enquiry is ready.</p>
+      <p class="note">Online booking, authentication, GPS and Razorpay can be connected later.</p>
+      <button class="btn primary" id="okBtn">Got it</button>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

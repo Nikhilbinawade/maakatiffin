@@ -1,20 +1,18 @@
+from flask import Flask, send_from_directory, jsonify
+from pathlib import Path
 import os
-from datetime import date
-from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
 
-app = FastAPI(title="MaaKaTiffin Production Starter")
+BASE_DIR = Path(__file__).resolve().parent
+app = Flask(__name__, static_folder=str(BASE_DIR), static_url_path="")
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/")
 def home():
-    return """
-    <html><body style="font-family:Arial;padding:40px">
-    <h1>🍱 MaaKaTiffin</h1>
-    <p>Production server is running.</p>
-    <p>Next: connect PostgreSQL, authentication, GPS and Razorpay.</p>
-    </body></html>
-    """
+    return send_from_directory(BASE_DIR, "index.html")
 
 @app.get("/health")
 def health():
-    return {"status":"ok","service":"maakatiffin"}
+    return jsonify({"status": "ok", "service": "MaakaTiffin"})
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
