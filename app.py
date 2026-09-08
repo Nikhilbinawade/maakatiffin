@@ -3,6 +3,7 @@ from pathlib import Path
 import os
 
 BASE_DIR = Path(__file__).resolve().parent
+
 app = Flask(__name__, static_folder=str(BASE_DIR), static_url_path="")
 
 @app.get("/")
